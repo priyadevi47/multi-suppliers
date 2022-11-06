@@ -1,0 +1,113 @@
+<section class="hsec3 fs10" id="{{section.settings.section-id}}">
+  <div class="container">
+    <div class="
+        hsec3-main-container flex {% if section.settings.flex-dir-left-right %} flex-dir-toggle
+        {% endif %}
+      ">
+      <div class="collection-meta">
+        <a href="{{section.settings.main-cat-url}}">
+          <div class="collection_meta_img">
+            <picture>
+              <source srcset="{{section.settings.main-cat-img | img_url: 'master'  }}" media="(min-width: 767px)">
+              <img src="{{ section.settings.main-cat-img-mob | img_url: 'master' }}" alt="MDN">
+            </picture>
+<!--             <img src="{{ section.settings.main-cat-img | img_url: 'master' }}" alt=""> -->
+          </div>
+        </a>
+        <a href="{{section.settings.main-cat-url}}">
+          <h2 class="center collection-title_center_new white">
+            <span>{{ section.settings.main-cat-heading }}</span>
+          </h2>
+        </a>
+      </div>
+
+      <div class="collection-products flex">
+        {% for block in section.blocks %}
+          <div class="product-items">
+            <a href="{{block.settings.sc-url}}">
+              <img src="{{ block.settings.sc-img | img_url: 'master' }}" alt="">
+            </a>
+            <a href="{{block.settings.sc-url}}">
+              <h3 class="center">{{ block.settings.sc-text }}</h3>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .product-items h3{
+    pointer:cursor;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Home Section 3",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "main-cat-img",
+      "label": "Select Main Category Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "main-cat-img-mob",
+      "label": "Select Main Category Image Mobile"
+    },
+    {
+      "type": "text",
+      "id": "main-cat-heading",
+      "label": "Select Main Category Heading"
+    },
+    {
+      "type": "url",
+      "id": "main-cat-url",
+      "label": "Select Main Category URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "flex-dir-left-right",
+      "label": "Content Direction: Left-Right",
+      "default": false
+    }
+  ],
+  "max_blocks": 6,
+  "blocks": [
+    {
+      "name": "Sub Category",
+      "type": "subCategory",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "sc-img",
+          "label": "Sub Category Image"
+        },
+        {
+          "type": "text",
+          "id": "sc-text",
+          "label": "Sub Category Heading"
+        },
+        {
+          "type": "url",
+          "id": "sc-url",
+          "label": "Sub Category URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home Section 3"
+    }
+  ]
+}
+{% endschema %}
+
+<!--
+  {%- if section.settings.flex-dir-left-right -%}
+  flex-dir-toggle
+  {%- endif -%}
+-->

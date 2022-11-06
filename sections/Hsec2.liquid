@@ -1,0 +1,101 @@
+<section class="hsec2 fs10" id="id="{{section.settings.section-id}}">
+    <div class="container">
+        <h2 class="center shop_dep_heading">{{section.settings.main-heading}}</h2>
+        <div class="hsec2-main-container">
+            <div>
+                <div class="collection-img-bg">
+                <a href="{{section.settings.main-cat-url}}">
+                    <div class="collection_img"> 
+                      <picture>
+                        <source srcset="{{section.settings.main-cat-img | img_url: 'master'  }}" media="(min-width: 767px)">
+                        <img src="{{ section.settings.main-cat-img-mob | img_url: 'master' }}" alt="MDN">
+                      </picture>
+<!--                         <img src="{{ section.settings.main-cat-img | img_url: 'master' }}" alt="{{ section.settings.collection_1.image.alt }}" /> -->
+                    </div>
+                </a>
+                 <a href="{{section.settings.main-cat-url}}"><h2 class="center collection-title_center white"><span>{{section.settings.main-cat-heading}}</span></h2></a>
+                </div>
+
+            </div>
+            <div class="collection-group flex ">
+            {% for block in section.blocks %}   
+                
+                <div class="collection-group-products">
+                    <a href="{{block.settings.sc-url}}">
+                        <img src="{{block.settings.sc-img|img_url: 'master' }}" alt="">
+                    </a>
+                     <a href="{{block.settings.sc-url}}"><h3 class="center">{{block.settings.sc-text}}</h3></a>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+  .collection-group-products  h3{
+    pointer:cursor;
+  }
+</style>
+{% schema %}
+{
+   "name": "Home Section 2",
+  "settings": [
+      {
+         "type": "text",
+         "id":"main-heading",
+         "label":"Section-2 : Main Heading"
+      },
+      {
+        "type": "image_picker",
+         "id":"main-cat-img",
+         "label":"Select Main Category Image"
+      },
+    {
+      "type": "image_picker",
+       "id":"main-cat-img-mob",
+       "label":"Select Main Category Image Mobile"
+    },
+      {
+        "type": "text",
+         "id":"main-cat-heading",
+         "label":"Select Main Category Heading"
+      },
+      {
+        "type": "url",
+         "id":"main-cat-url",
+         "label":"Select Main Category URL"
+      }
+  ],
+  "max_blocks": 8,
+  "blocks": [
+     {
+       "name": "Sub Category",
+       "type": "subCategory",
+       "settings": [
+         {
+           "type": "image_picker",
+           "id": "sc-img",
+           "label": "Sub Category Image"
+         },
+         {
+            "type": "text",
+            "id": "sc-text",
+            "label": "Sub Category Heading"
+          },
+          {
+            "type": "url",
+            "id": "sc-url",
+            "label": "Sub Category URL"
+          }
+       ]
+     }
+  ],
+
+  "presets": [
+    {
+      "name": "Home Section 2"
+    }
+  ]
+}
+{% endschema %}

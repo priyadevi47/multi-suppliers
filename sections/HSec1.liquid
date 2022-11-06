@@ -1,0 +1,88 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js"></script>
+{{ 'HomeSectionStyle.css' | asset_url | stylesheet_tag }}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.core.min.css">
+
+<section class="hsec1 fs10">
+    <div class="container-max">
+        <div class="glide">
+            <div class="glide__track" data-glide-el="track">
+              <ul class="glide__slides">
+                {% for block in section.blocks %}
+                  
+                    <li class="glide__slide">
+                    <div class="hsec1-main-container flex {% if forloop.index == 3 %} static-img {% endif %}"   style=" background-image: url({{ block.settings.bg-image | img_url:"master" }}); " >
+                        {% if block.settings.image != Null %}
+                            <img src="{{ block.settings.image | img_url:"master"  }}" {% if forloop.index == 2 %} class="chandra-img" {% endif %} alt="vector">
+                          {% endif %}
+                        <h1 class="white">{{block.settings.main-heading}}</h1>
+                       {% if block.settings.btn-text != '' %}
+                            <a href="{{block.settings.btn-url}}" class="white flex main-btn">{{block.settings.btn-text}}</a>
+                          {% endif %}
+                       
+                     </div>
+                </li>
+                 
+                {% endfor %}
+               </ul>
+            </div>
+
+            <div class="glide__bullets glide-bullet-new" data-glide-el="controls[nav]">
+                <button class="glide__bullet" data-glide-dir="=0"></button>
+                <button class="glide__bullet" data-glide-dir="=1"></button>
+                <button class="glide__bullet" data-glide-dir="=2"></button>
+              </div> 
+          </div>
+        
+    </div>
+</section>
+
+<script>
+  var glide = new Glide('.glide', {
+  autoplay: 6000,
+  hoverpause: false
+})
+glide.mount();
+</script>
+
+
+
+{% schema %}
+{
+   "name": "Home Section 1",
+   "blocks": [
+   {
+     "name": "SecSlider",
+     "type": "SecSlider",
+     "settings": [
+        {
+           "type":"image_picker",
+           "id":"bg-image",
+           "label":"Background Image"
+        }, 
+       {
+         "type": "image_picker",
+         "id": "image",
+         "label": "Image"
+       },
+       {
+          "type": "text",
+          "id":"main-heading",
+          "label":"Main Heading"
+       },
+       {
+          "type": "url",
+          "id":"btn-url",
+          "label":"Button URL"
+       },
+       {
+          "type": "text",
+          "id":"btn-text",
+          "label":"Button Label"
+       }
+     ]
+   }
+]
+}
+{% endschema %}
+

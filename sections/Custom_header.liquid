@@ -1,0 +1,130 @@
+{{ 'Custom_header_style.css' | asset_url | stylesheet_tag }}
+
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+<div class="header2 fs10">
+  <div class="container-max">
+    <div class="header-main-container">
+      <div class="header-part1 flex">
+        <!-- mobile version -->
+
+        <div class="header-mobile-nav">
+          <div class="mobile_nav_icon ">
+            <li class="w3-xxlarge"><i class="fa fa-bars"></i></li>
+          </div>
+          <nav class="nav mobile_nav_item">
+            <div class="mobile_cross_icon">
+              <li class="w3-xxlarge"><i class="fa fa-close"></i></li>
+            </div>
+
+            <ul class="menu flex">
+              {% for link in section.settings.header-nav.links %}
+                <li class="menu-link">
+                  <a href="{{ link.url }}">{{ link.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </nav>
+        </div>
+        <!-- mobile hidden -->
+
+        <div class="header-logo">
+          <a href="/">
+            <img
+              src="{{section.settings.Header_logo | img_url: 'master'}}"
+              alt="Logo-img"
+          ></a>
+        </div>
+
+        <div class="header-search">
+          <form action="{{ routes.search_url }}">
+            <input
+              type="text"
+              placeholder="Make your house a home..."
+              name="q"
+              value="{{ search.terms | escape }}"
+            >
+            <button type="submit">
+              <span
+                ><img
+                  src="https://cdn.shopify.com/s/files/1/0628/7455/0523/files/Vector_6c18cd0b-ba51-4449-b36e-8e71801bbe77.png?v=1662257652"
+                  alt="search"
+              ></span>
+            </button>
+          </form>
+        </div>
+
+        <div class="header-cart">
+          <a href="/cart"
+            ><img
+              src="https://cdn.shopify.com/s/files/1/0628/7455/0523/files/Cart.png?v=1662257863"
+              alt="cart"
+            >
+            <span>Cart</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="header-part2 container">
+        <nav class="nav">
+          <ul class="menu flex">
+            {% for link in section.settings.header-nav.links %}
+              <li class="menu-link">
+                <a href="{{ link.url }}">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </nav>
+      </div>
+
+      <div class="header-search2">
+        <form action="{{ routes.search_url }}">
+          <input
+            type="text"
+            placeholder="Make your house a home..."
+            name="q"
+            value="{{ search.terms | escape }}"
+          >
+          <button type="submit">
+            <span
+              ><img
+                src="https://cdn.shopify.com/s/files/1/0628/7455/0523/files/Vector_6c18cd0b-ba51-4449-b36e-8e71801bbe77.png?v=1662257652"
+                alt="search"
+            ></span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const mobile_nav_icon = document.querySelector('.mobile_nav_icon')
+  const header_mobile_nav = document.querySelector('.mobile_nav_item')
+  const mobile_cross_icon = document.querySelector('.mobile_cross_icon')
+  const navToggler = function(){
+    header_mobile_nav.classList.toggle("toggle-nav");
+  }
+
+  // event listener
+  mobile_nav_icon.addEventListener('click', navToggler);
+  mobile_cross_icon.addEventListener('click', navToggler);
+</script>
+
+{% schema %}
+{
+  "name": "Custom Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "Header_logo",
+      "label": "Header Logo Img"
+    },
+    {
+      "type": "link_list",
+      "id": "header-nav",
+      "label": "Header Navigation"
+    }
+  ]
+}
+{% endschema %}

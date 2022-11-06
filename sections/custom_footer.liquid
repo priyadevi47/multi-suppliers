@@ -1,0 +1,125 @@
+{{ 'Custom_header_style.css' | asset_url | stylesheet_tag }}
+<div class="footer">
+  <div class="container">
+    <div class="main-footer-container flex">
+      <div class="footer-left-block">
+        <h3>{{ section.settings.contact-heading }}</h3>
+        <p>
+          {{ section.settings.contact-add }}
+        </p>
+      </div>
+
+      <div class="footer-right-block">
+        <h3>{{ section.settings.newletter-heading }}</h3>
+        <p>{{ section.settings.nl-para }}</p>
+
+        <div class="newsletter-form-footer">
+          {% form 'customer' %}
+            <div class="email">
+              <input type="email" name="contact[email]" placeholder=" Enter your email...">
+            </div>
+
+            <div class="submit">
+              <input type="submit" value="{{section.settings.email-text}}">
+            </div>
+
+            
+              {% if form.posted_successfully? %}
+                <p class="footer__boxFormMsg">Successfully added!</p>
+              {% else %}
+                <p class="footer__boxFormMsg">{{ form.errors | default_errors }}</p>
+              {% endif %}
+           
+          {% endform %}
+        </div>
+      </div>
+      <div class="footer-menu-block1">
+        <ul class="footer-menu flex ">
+        {% for link in section.settings.footer-link.links %}
+          <li class="footer-menu-link">
+            <a href="{{ link.url }}">{{ link.title }}</a>
+
+            {% if link.links.size > 0 %}
+              <ul class="menu dropdown-child">
+                {% for child_link in link.links %}
+                  <li class="menu-link">
+                    <a href="{{ child_link.url }}">{{ child_link.title }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+      </div>
+      
+      <div class="footer-menu-block2">
+        <ul class="footer-menu2 flex ">
+        {% for link in section.settings.footer-link2.links %}
+          <li class="footer-menu-link">
+            {% if link.title == "Home" %}
+              {% continue %}
+            {% endif %}
+
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+      </div>
+      
+
+      <div class="copyright">
+        <p>© Copyright 2022 Homesuperstore. All rights reserved.</p>
+      </div>
+    </div>
+
+    <!--
+      <div class="footer-nav flex">
+
+      </div>
+    -->
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "contact-heading",
+      "label": "Contact Us: Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "contact-add",
+      "label": "Contact Address"
+    },
+    {
+      "type": "text",
+      "id": "newletter-heading",
+      "label": "Newletter: Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "nl-para",
+      "label": "Newletter: Text"
+    },
+    {
+      "type": "text",
+      "id": "email-text",
+      "label": "Signup-text"
+    },
+    {
+      "type": "link_list",
+      "id": "footer-link",
+      "label": "Footer Navigation"
+    },
+    {
+      "type": "link_list",
+      "id": "footer-link2",
+      "label": "Footer Navigation : 2"
+    }
+  ]
+}
+{% endschema %}

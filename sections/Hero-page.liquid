@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="hero-img">
+    <picture>
+      <source srcset="{{ section.settings.hero-img-des | img_url: 'master' }}" media="(min-width: 767px)">
+      <img src="{{ section.settings.hero-img-mob | img_url: 'master' }}" alt="MDN">
+    </picture>
+  </div>
+</div>
+
+<style>
+    .hero-img{
+        padding: 20px 0 50px;
+    }
+    .hero-img picture {
+      border-radius: 10px;
+      overflow: hidden;
+      display: block;
+      width: 100%;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Hero page",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero-img-des",
+      "label": "Hero Image: Desktop"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero-img-mob",
+      "label": "Hero Image: Mobile"
+    }
+  ]
+}
+{% endschema %}
